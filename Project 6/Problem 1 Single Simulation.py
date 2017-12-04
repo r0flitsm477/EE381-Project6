@@ -2,7 +2,8 @@
 """
 Created on Sun Dec  3 15:11:26 2017
 
-@author: Matthew
+@author: Matthew Kim
+EE381 Project 6
 Problem 1 single simulation
 """
 
@@ -24,17 +25,18 @@ State = ['0'] * 15
 #
 r0 = np.random.rand()  # Calculate initial state
 if  r0<=d01 : 
-    State[0] = 'R'
+    s0 = 'R'
     R[0] = 1
 elif (r0>d01 and r0<=d01+d02) :
-    State[0] = 'N'
+    s0 = 'N'
     N[0] = 1
 elif r0>d01+d02 :
-    State[0] = 'S'
+    s0 = 'S'
     S[0] = 1
+State[0] = s0
 #
 for k in range (1, n):
-    s = State[0]
+    s = State[k-1]
     r = np.random.rand()
     if s=='R' :
         if r<=p11 :

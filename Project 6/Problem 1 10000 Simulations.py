@@ -2,7 +2,8 @@
 """
 Created on Sun Dec  3 23:35:32 2017
 
-@author: matth
+@author: Matthew Kim
+EE381 Project 6
 Problem 1 10000 simulations
 """
 
@@ -11,6 +12,8 @@ from matplotlib import pyplot as plt
 
 N = 10000
 n = 15      # Number of transitions to be computed
+X = np.char.array(np.zeros((n,N)))
+M = np.zeros((n,3))
 #
 p11 = 1/3; p12 = 1/3; p13 = 1/3;  # Transition probabilities
 p21 = 1/2; p22 = 0; p23 = 1/2;
@@ -18,61 +21,46 @@ p31 = 1/4; p32 = 1/4; p33 = 1/2;
 #
 d01 = 1/4; d02 = 1/2; d03 = 1/4;  # Probability distribution for initial state
 #
-R = np.zeros(n)
-N = np.zeros(n)
-S = np.zeros(n)
-State = ['0'] * 15
+for k in range(0,N) :
+    r0 = np.random.rand()  # Calculate initial state
+    if  r0<=d01 : 
+        s0 = 'R'
+    elif (r0>d01 and r0<=d01+d02) :
+        s0 = 'N'
+    elif r0>d01+d02 :
+        s0 = 'S'
+    X[0,k] = s0
 #
-r0 = np.random.rand()  # Calculate initial state
-if  r0<=d01 : 
-    State[0] = 'R'
-    R[0] = 1
-elif (r0>d01 and r0<=d01+d02) :
-    State[0] = 'N'
-    N[0] = 1
-elif r0>d01+d02 :
-    State[0] = 'S'
-    S[0] = 1
+for k in range(0,N) :
+    for j in range(1,n) :
+        sp = X[j-1,k]
+        r = np.random.rand()
+        if sp==b'R' :
+            if r<=p11 :
+                s = 'R'
+            elif (r>p11 and r<=p11+p12) :
+                s = 'N'
+            elif r>p11+p12 :
+                s = 'S'
+        elif sp==b'N' :
+            if r<=p21 :
+                s = 'R'
+            elif (r>p21 and r<=p21+p22) :
+                s = 'N'
+            elif r>p21+p22 :
+                s = 'S'
+        elif sp==b'S' :
+            if r<=p31 :
+                s = 'R'
+            elif (r>p31 and r<=p21+p32) :
+                s = 'N'
+            elif r>p31+p32 :
+                s = 'S'
+        X[j,k] = s
 #
-for k in range (1, n):
-    s = State[0]
-    r = np.random.rand()
-    if s=='R' :
-        if r<=p11 :
-            State[k] = 'R'
-            R[k] = 1
-        elif (r>p11 and r<=p11+p12) :
-            State[k] = 'N'
-            N[k] = 1
-        elif r>p11+p12 :
-            State[k] = 'S'
-            S[k] = 1
-    elif s=='N' :
-        if r<=p21 :
-            State[k] = 'R'
-            R[k] = 1
-        elif (r>p21 and r<=p21+p22) :
-            State[k] = 'N'
-            N[k] = 1
-        elif r>p21+p22 :
-            State[k] = 'S'
-            S[k] = 1
-    elif s=='S' :
-        if r<=p31 :
-            State[k] = 'R'
-            R[k] = 1
-        elif (r>p31 and r<=p21+p32) :
-            State[k] = 'N'
-            N[k] = 1
-        elif r>p31+p32 :
-            State[k] = 'S'
-            S[k] = 1
-#
-fig1 = plt.figure(1)
-Rain = plt.plot(R, '--*', label='Rain')
-Nice = plt.plot(N, '--o', label='Nice')
-Snow = plt.plot(S, '--+', label='Snow')
-plt.title('Three-state Markov Chain: Single Run')
-plt.xlabel('Time step(n)')
-plt.ylabel('State')
-plt.legend()
+for j in range (0, n) :
+    x = X[j,:]
+    ma = len(x.find(x==b'R'))
+    mb = len(x.find(x==b'N'))
+    mc = len(x.find(x==b'S'))
+    M[k,:] = [ma, mb, mc]
