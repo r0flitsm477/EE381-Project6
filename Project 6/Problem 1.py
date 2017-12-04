@@ -22,7 +22,7 @@ p31 = 1/4; p32 = 1/4; p33 = 1/2;
 d01 = 1/4; d02 = 1/2; d03 = 1/4;  # Probability distribution for initial state
 #
 for j in range (1, N) :
-    r0 = np.random.rand();  # Calculate initial state
+    r0 = np.random.rand()   # Calculate initial state
     if  r0<=d01 : 
         s0 = 'R'
     elif (r0>d01 and r0<=d01+d02) :
@@ -33,7 +33,7 @@ for j in range (1, N) :
 #
 for k in range (1, n-1):
     s = S[k]
-    r = np.rand();
+    r = np.rand()
     if s=='R' :
         if r<=p11 :
             S[k+1] = 'R'

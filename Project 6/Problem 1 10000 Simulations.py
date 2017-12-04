@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Dec  3 15:11:26 2017
+Created on Sun Dec  3 23:35:32 2017
 
-@author: Matthew
-Problem 1 single simulation
+@author: matth
+Problem 1 10000 simulations
 """
 
 import numpy as np
 from matplotlib import pyplot as plt
 
+N = 10000
 n = 15      # Number of transitions to be computed
 #
 p11 = 1/3; p12 = 1/3; p13 = 1/3;  # Transition probabilities
