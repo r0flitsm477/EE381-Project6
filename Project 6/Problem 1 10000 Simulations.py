@@ -84,12 +84,12 @@ plt.legend()
 #
 nv = range(0,n)
 P = np.matrix([[p11, p12, p13],
-              [p21, p22, p23],
-              [p31, p32, p33]])
+               [p21, p22, p23],
+               [p31, p32, p33]])
 y0 = [1/4, 1/2, 1/4]
 Y = np.zeros((n,3))
 Y[0,:] = y0
-for k in range(1, n) :
+for k in range(1,n) :
     Y[k,:] = Y[k-1,:]*P
 #
 fig2 = plt.figure(2)

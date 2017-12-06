@@ -35,7 +35,7 @@ elif r0>d01+d02 :
     S[0] = 1
 State[0] = s0
 #
-for k in range (1, n):
+for k in range (1,n):
     s = State[k-1]
     r = np.random.rand()
     if s=='R' :
