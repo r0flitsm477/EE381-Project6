@@ -60,7 +60,27 @@ for k in range(0,N) :
 #
 for j in range (0, n) :
     x = X[j,:]
-    ma = len(x.find(x==b'R'))
-    mb = len(x.find(x==b'N'))
-    mc = len(x.find(x==b'S'))
-    M[k,:] = [ma, mb, mc]
+    mr = 0 #len(x.find(x==b'R'))
+    mn = 0 #len(x.find(x==b'N'))
+    ms = 0 #len(x.find(x==b'S'))
+    for k in range(0, N):
+        if x[k]==b'R' :
+            mr += 1
+        elif x[k]==b'N' :
+            mn += 1
+        elif x[k]==b'S' :
+            ms += 1
+    M[j,:] = [mr/N, mn/N, ms/N]
+#
+R = M[:,0]
+N = M[:,1]
+S = M[:,2]
+#
+fig1 = plt.figure(1)
+Rain = plt.plot(R, '--*', label='Rain')
+Nice = plt.plot(N, '--o', label='Nice')
+Snow = plt.plot(S, '--+', label='Snow')
+plt.title('Three-state Markov Chain: 10,000 Simulations')
+plt.xlabel('Time step(n)')
+plt.ylabel('State Probability')
+plt.legend()
