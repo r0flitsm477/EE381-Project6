@@ -71,16 +71,32 @@ for j in range (0, n) :
         elif x[k]==b'S' :
             ms += 1
     M[j,:] = [mr/N, mn/N, ms/N]
-#
-R = M[:,0]
-N = M[:,1]
-S = M[:,2]
+
 #
 fig1 = plt.figure(1)
-Rain = plt.plot(R, '--*', label='Rain')
-Nice = plt.plot(N, '--o', label='Nice')
-Snow = plt.plot(S, '--+', label='Snow')
+plt.plot(M[:,0], '--*', label='Rain')
+plt.plot(M[:,1], '--o', label='Nice')
+plt.plot(M[:,2], '--+', label='Snow')
 plt.title('Three-state Markov Chain: 10,000 Simulations')
 plt.xlabel('Time step(n)')
 plt.ylabel('State Probability')
+plt.legend()
+#
+nv = range(0,n)
+P = np.matrix([[p11, p12, p13],
+              [p21, p22, p23],
+              [p31, p32, p33]])
+y0 = [1/4, 1/2, 1/4]
+Y = np.zeros((n,3))
+Y[0,:] = y0
+for k in range(1, n) :
+    Y[k,:] = Y[k-1,:]*P
+#
+fig2 = plt.figure(2)
+plt.plot(nv, Y[:,0], '--*', label='Rain')
+plt.plot(nv, Y[:,1], '--o', label='Nice')
+plt.plot(nv, Y[:,2], '--+', label='Snow')
+plt.title('Results based on State Transition Matrix -- States R, N, S')
+plt.xlabel('Time step(n)')
+plt.ylabel('Prob(State)')
 plt.legend()

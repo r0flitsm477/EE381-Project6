@@ -64,7 +64,7 @@ for j in range (1, n) :
     mc = len(x.find(x=='S'))
     #M[j,:] = [ma, mb, mc]/N
 #
-"""
+
 nv = range(0, n-1)
 fig1 = plt.figure(1)
 plt.plot(nv, M[:,1], '*:', 
@@ -101,4 +101,3 @@ plt.title('Comparison: Experimental simulation & State transition matrix')
 plt.xlabel('Time step (n)')
 plt.ylabel('Prob(State)')
 plt.legend('Experimental simulation', 'State transition matrix')
-"""
